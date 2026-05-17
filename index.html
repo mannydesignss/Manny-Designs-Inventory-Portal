@@ -295,38 +295,41 @@
     .upload-box {
       border: 2px dashed var(--gray-300); border-radius: 12px;
       overflow: hidden; transition: all 0.2s; position: relative;
+      min-height: 140px;
     }
     .upload-box:hover { border-color: var(--gray-400); }
     .upload-label {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      height: 140px; cursor: pointer; gap: 8px;
+      min-height: 140px; cursor: pointer; gap: 8px;
     }
     .upload-label i { font-size: 24px; color: var(--gray-400); }
     .upload-label span { font-size: 11px; color: var(--gray-500); text-align: center; padding: 0 12px; line-height: 1.5; }
     .upload-label input { display: none; }
     .upload-preview {
-      position: absolute; inset: 0;
       display: none; flex-direction: column;
+      width: 100%;
     }
-    .upload-preview img { width: 100%; height: 100%; object-fit: cover; }
-    .upload-preview .img-actions {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      display: flex; gap: 0;
+    .upload-preview img {
+      width: 100%; height: 120px; object-fit: cover;
+      display: block;
+    }
+    .img-actions {
+      display: flex; width: 100%;
     }
     .upload-preview .change-img {
-      flex: 1; padding: 7px; background: rgba(26,86,219,0.85); color: white;
+      flex: 1; padding: 8px 4px; background: var(--blue); color: white;
       border: none; font-size: 11px; font-weight: 600; cursor: pointer;
       font-family: 'DM Sans', sans-serif; display: flex; align-items: center;
-      justify-content: center; gap: 4px;
+      justify-content: center; gap: 4px; text-align: center;
     }
     .upload-preview .remove-img {
-      flex: 1; padding: 7px; background: rgba(0,0,0,0.7); color: white;
+      flex: 1; padding: 8px 4px; background: #374151; color: white;
       border: none; font-size: 11px; font-weight: 600; cursor: pointer;
       font-family: 'DM Sans', sans-serif; display: flex; align-items: center;
       justify-content: center; gap: 4px;
     }
-    .upload-preview .change-img:hover { background: rgba(26,86,219,1); }
-    .upload-preview .remove-img:hover { background: rgba(0,0,0,0.9); }
+    .upload-preview .change-img:hover { background: var(--blue-dark); }
+    .upload-preview .remove-img:hover { background: #111827; }
     .upload-box.has-image { border-style: solid; border-color: var(--blue); }
     .upload-box.has-image .upload-preview { display: flex; }
     .upload-box.has-image .upload-label { display: none; }
