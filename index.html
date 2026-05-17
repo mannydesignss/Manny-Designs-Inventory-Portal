@@ -473,22 +473,12 @@
     <div class="stat-card">
       <div class="stat-top">
         <div>
-          <div class="stat-label">Total Products</div>
-          <div class="stat-value" id="stat-total">0</div>
-        </div>
-        <div class="stat-icon blue"><i class="fas fa-box"></i></div>
-      </div>
-      <div class="stat-meta"><span class="up">↑ Growing</span> · All submitted items</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-top">
-        <div>
           <div class="stat-label">Men's Wear</div>
           <div class="stat-value" id="stat-mens">0</div>
         </div>
-        <div class="stat-icon amber"><i class="fas fa-clock"></i></div>
+        <div class="stat-icon blue"><i class="fas fa-mars"></i></div>
       </div>
-      <div class="stat-meta">Total men products submitted</div>
+      <div class="stat-meta">Total men's products submitted</div>
     </div>
     <div class="stat-card">
       <div class="stat-top">
@@ -496,9 +486,9 @@
           <div class="stat-label">Women's Wear</div>
           <div class="stat-value" id="stat-womens">0</div>
         </div>
-        <div class="stat-icon blue"><i class="fas fa-check-double"></i></div>
+        <div class="stat-icon amber"><i class="fas fa-venus"></i></div>
       </div>
-      <div class="stat-meta">Total women products submitted</div>
+      <div class="stat-meta">Total women's products submitted</div>
     </div>
     <div class="stat-card">
       <div class="stat-top">
@@ -506,9 +496,19 @@
           <div class="stat-label">Unisex</div>
           <div class="stat-value" id="stat-unisex">0</div>
         </div>
-        <div class="stat-icon amber"><i class="fas fa-times-circle"></i></div>
+        <div class="stat-icon green"><i class="fas fa-venus-mars"></i></div>
       </div>
       <div class="stat-meta">Total unisex products submitted</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div>
+          <div class="stat-label">Kids</div>
+          <div class="stat-value" id="stat-kids">0</div>
+        </div>
+        <div class="stat-icon red"><i class="fas fa-child"></i></div>
+      </div>
+      <div class="stat-meta">Total kids products submitted</div>
     </div>
   </div>
 
@@ -521,6 +521,7 @@
         <button class="filter-tab" onclick="filterTable('mens', this)">Men's</button>
         <button class="filter-tab" onclick="filterTable('womens', this)">Women's</button>
         <button class="filter-tab" onclick="filterTable('unisex', this)">Unisex</button>
+        <button class="filter-tab" onclick="filterTable('kids', this)">Kids</button>
       </div>
     </div>
     <div style="overflow-x:auto;">
@@ -1082,7 +1083,7 @@
     const sku = generateSKU(cat);
     const date = new Date().toISOString().split('T')[0];
 
-    const product = { sku, name, category: cat, gender, price, qty, sizes, date, status: 'pending' };
+    const product = { sku, name, category: cat, gender, price, qty, sizes, date, status: 'uploaded' };
     products.push(product);
     localStorage.setItem('md_products', JSON.stringify(products));
 
@@ -1131,15 +1132,15 @@
   ───────────────────────────────────────── */
   function refreshDashboard() {
     // Stats
-    const total = products.length;
     const mens = products.filter(p => p.gender === 'Men').length;
     const womens = products.filter(p => p.gender === 'Women').length;
     const unisex = products.filter(p => p.gender === 'Unisex').length;
+    const kids = products.filter(p => p.gender === 'Kids').length;
 
-    document.getElementById('stat-total').textContent = total;
     document.getElementById('stat-mens').textContent = mens;
     document.getElementById('stat-womens').textContent = womens;
     document.getElementById('stat-unisex').textContent = unisex;
+    document.getElementById('stat-kids').textContent = kids;
 
     renderTable('all');
   }
@@ -1160,6 +1161,7 @@
     else if (filter === 'mens') filtered = products.filter(p => p.gender === 'Men');
     else if (filter === 'womens') filtered = products.filter(p => p.gender === 'Women');
     else if (filter === 'unisex') filtered = products.filter(p => p.gender === 'Unisex');
+    else if (filter === 'kids') filtered = products.filter(p => p.gender === 'Kids');
     else filtered = products.filter(p => p.status === filter);
 
     if (filtered.length === 0) {
