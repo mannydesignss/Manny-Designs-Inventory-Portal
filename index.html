@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manny Designs | Vendor Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --blue: #1a56db;
+      --blue-dark: #1344b5;
+      --blue-light: #e8f0fe;
+      --black: #0f1117;
+      --gray-50: #f8f9fb;
+      --gray-100: #f0f2f5;
+      --gray-200: #e4e7ed;
+      --gray-300: #c9cdd7;
+      --gray-400: #9ba3b2;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --white: #ffffff;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --orange: #f97316;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--gray-50);
+      color: var(--black);
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 32px;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; max-width: 1200px; margin: 0 auto;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; cursor: pointer;
+    }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--blue);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: white; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px;
+    }
+    .logo-text {
+      font-family: 'Playfair Display', serif; font-weight: 600;
+      font-size: 18px; color: var(--black);
+    }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-link {
+      padding: 8px 16px; border-radius: 8px; font-size: 14px;
+      font-weight: 500; cursor: pointer; border: none; background: none;
+      color: var(--gray-700); transition: all 0.2s;
+    }
+    .nav-link:hover { background: var(--gray-100); color: var(--black); }
+    .nav-link.active { background: var(--blue-light); color: var(--blue); }
+
+    /* ── PAGES ── */
+    .page { display: none !important; }
+    .page.active { display: block !important; }
+    #page-landing.active { display: flex !important; }
+
+    /* ── LANDING ── */
+    #page-landing {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f1117 0%, #1a2540 50%, #1a56db22 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 16px;
+    }
+    .landing-card {
+      background: white; border-radius: 20px; padding: 48px 40px;
+      max-width: 480px; width: 100%; text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+      animation: slideUp 0.6s ease;
+    }
+    .landing-logo-big {
+      width: 64px; height: 64px; background: var(--blue);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 28px; color: white;
+      box-shadow: 0 8px 24px rgba(26,86,219,0.35);
+    }
+    .landing-title { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+    .landing-sub {
+      font-size: 11px; font-weight: 600; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px;
+    }
+    .landing-desc {
+      font-size: 14px; color: var(--gray-500); line-height: 1.7;
+      margin-bottom: 32px; max-width: 340px; margin-left: auto; margin-right: auto;
+    }
+    .landing-desc { margin-bottom: 32px; }
+    .btn-primary {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px 24px; background: var(--blue); color: white;
+      border: none; border-radius: 10px; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; margin-bottom: 10px;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 4px 16px rgba(26,86,219,0.3);
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,86,219,0.4); }
+    .btn-secondary {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 12px 24px; background: none; color: var(--gray-700);
+      border: none; border-radius: 10px; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    }
+    .btn-secondary:hover { background: var(--gray-100); color: var(--black); }
+    .landing-footer { margin-top: 24px; font-size: 11px; color: var(--gray-300); }
+
+    /* ── DASHBOARD ── */
+    #page-dashboard { padding: 88px 24px 48px; max-width: 1200px; margin: 0 auto; }
+    .dashboard-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px; flex-wrap: gap;
+    }
+    .dashboard-header h1 { font-size: 28px; font-weight: 700; }
+    .dashboard-header p { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+    .btn-new {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; background: var(--blue); color: white;
+      border: none; border-radius: 10px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 4px 12px rgba(26,86,219,0.25); white-space: nowrap;
+    }
+    .btn-new:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; margin-bottom: 28px;
+    }
+    .stat-card {
+      background: white; border-radius: 14px; padding: 22px;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .stat-top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .stat-label { font-size: 11px; color: var(--gray-500); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+    .stat-value { font-size: 26px; font-weight: 600; color: var(--black); margin-top: 4px; font-family: 'DM Sans', sans-serif; }
+    .stat-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .stat-icon.blue { background: var(--blue-light); color: var(--blue); }
+    .stat-icon.amber { background: #fef3c7; color: var(--amber); }
+    .stat-icon.green { background: #d1fae5; color: var(--green); }
+    .stat-icon.red { background: #fee2e2; color: var(--red); }
+    .stat-meta { margin-top: 10px; font-size: 12px; color: var(--gray-400); }
+    .stat-meta span { font-weight: 600; }
+    .stat-meta .up { color: var(--green); }
+    .stat-meta .down { color: var(--red); }
+
+    .table-card {
+      background: white; border-radius: 14px; border: 1px solid var(--gray-200);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;
+    }
+    .table-header {
+      padding: 18px 24px; border-bottom: 1px solid var(--gray-100);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .table-header h2 { font-size: 17px; font-weight: 600; }
+    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-tab {
+      padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
+      cursor: pointer; border: none; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+      background: var(--gray-100); color: var(--gray-500);
+    }
+    .filter-tab:hover { background: var(--gray-200); color: var(--gray-700); }
+    .filter-tab.active { background: var(--blue); color: white; }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { border-bottom: 1px solid var(--gray-100); }
+    thead th {
+      text-align: left; padding: 12px 20px;
+      font-size: 11px; font-weight: 600; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: 0.6px;
+    }
+    tbody tr { border-bottom: 1px solid var(--gray-50); transition: background 0.15s; }
+    tbody tr:hover { background: var(--gray-50); }
+    tbody tr:last-child { border-bottom: none; }
+    td { padding: 14px 20px; font-size: 13px; }
+    .sku { font-family: monospace; font-weight: 600; color: var(--blue); font-size: 13px; }
+    .product-name { font-weight: 500; color: var(--black); }
+    .category { color: var(--gray-500); }
+    .price { font-weight: 600; color: var(--black); }
+    .date { color: var(--gray-400); }
+
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 10px;
+      border-radius: 20px; font-size: 11px; font-weight: 600; border: 1px solid;
+    }
+    .badge.ready { background: #d1fae5; color: #065f46; border-color: #a7f3d0; }
+    .badge.pending { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+    .badge.uploaded { background: var(--blue-light); color: var(--blue); border-color: #bfdbfe; }
+    .badge.editing { background: #ffedd5; color: #9a3412; border-color: #fed7aa; }
+    .badge.outofstock { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+
+    /* ── SUBMIT FORM ── */
+    #page-submit { padding: 88px 16px 48px; max-width: 700px; margin: 0 auto; }
+    .form-title { margin-bottom: 24px; }
+    .form-title h1 { font-size: 26px; font-weight: 700; }
+    .form-title p { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+
+    .progress-bar-wrap { margin-bottom: 28px; }
+    .progress-meta {
+      display: flex; justify-content: space-between; margin-bottom: 8px;
+      font-size: 12px; font-weight: 500;
+    }
+    .progress-meta .step-label { color: var(--gray-500); }
+    .progress-meta .pct { color: var(--blue); font-weight: 600; }
+    .progress-track {
+      width: 100%; height: 6px; background: var(--gray-200); border-radius: 99px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: var(--blue); border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    .form-card {
+      background: white; border-radius: 16px; padding: 36px 32px;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .form-card h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+    .form-card .step-desc { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; }
+
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeIn 0.3s ease; }
+
+    .field-group { display: grid; gap: 16px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: 13px; font-weight: 500; color: var(--gray-700); }
+    .field label .req { color: var(--red); margin-left: 2px; }
+    .field input, .field select, .field textarea {
+      padding: 11px 14px; border-radius: 8px; border: 1px solid var(--gray-300);
+      font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--black);
+      background: white; transition: all 0.2s; outline: none;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--gray-300); }
+    .field textarea { resize: vertical; line-height: 1.6; }
+    .field select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236b7280'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 36px; }
+    .hint { font-size: 11px; color: var(--gray-400); margin-top: -2px; }
+
+    /* Size checkboxes */
+    .size-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .size-chip {
+      padding: 7px 14px; border-radius: 8px; border: 1px solid var(--gray-200);
+      font-size: 13px; font-weight: 500; cursor: pointer; background: white;
+      transition: all 0.2s; user-select: none; color: var(--gray-700);
+    }
+    .size-chip:hover { border-color: var(--blue); color: var(--blue); }
+    .size-chip.selected { background: var(--blue); color: white; border-color: var(--blue); }
+
+    /* Color swatches */
+    .color-list { display: flex; flex-direction: column; gap: 8px; }
+    .color-entry { display: flex; align-items: center; gap: 10px; }
+    .color-entry input[type="text"] { flex: 1; }
+    .color-entry input[type="color"] {
+      width: 36px; height: 36px; padding: 2px; border-radius: 6px;
+      border: 1px solid var(--gray-200); cursor: pointer; background: none;
+    }
+    .btn-add-color {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; background: var(--gray-100); color: var(--gray-700);
+      border: none; border-radius: 8px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+      margin-top: 4px;
+    }
+    .btn-add-color:hover { background: var(--gray-200); }
+
+    /* Image upload */
+    .images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .upload-box {
+      border: 2px dashed var(--gray-300); border-radius: 12px;
+      overflow: hidden; transition: all 0.2s; position: relative;
+    }
+    .upload-box:hover { border-color: var(--gray-400); }
+    .upload-label {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 140px; cursor: pointer; gap: 8px;
+    }
+    .upload-label i { font-size: 24px; color: var(--gray-400); }
+    .upload-label span { font-size: 11px; color: var(--gray-500); text-align: center; padding: 0 12px; line-height: 1.5; }
+    .upload-label input { display: none; }
+    .upload-preview {
+      position: absolute; inset: 0;
+      display: none; flex-direction: column;
+    }
+    .upload-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .upload-preview .remove-img {
+      position: absolute; top: 6px; right: 6px;
+      width: 24px; height: 24px; background: rgba(0,0,0,0.6); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 12px; border: none;
+    }
+    .upload-box.has-image .upload-preview { display: flex; }
+    .upload-box.has-image .upload-label { display: none; }
+
+    /* Submission preview */
+    .preview-box {
+      background: var(--gray-50); border-radius: 10px; padding: 16px;
+    }
+    .preview-box h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+    .preview-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; }
+    .preview-key { font-size: 12px; color: var(--gray-500); }
+    .preview-val { font-size: 12px; font-weight: 500; color: var(--black); }
+
+    .info-box {
+      background: var(--blue-light); border: 1px solid rgba(26,86,219,0.2);
+      border-radius: 10px; padding: 14px 16px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .info-box i { color: var(--blue); margin-top: 2px; }
+    .info-box p { font-size: 12px; color: var(--gray-700); line-height: 1.6; }
+    .info-box strong { display: block; font-weight: 600; color: var(--black); font-size: 13px; margin-bottom: 2px; }
+
+    /* Form nav buttons */
+    .form-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--gray-100);
+    }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 11px 20px; background: none; color: var(--gray-700);
+      border: none; border-radius: 10px; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    }
+    .btn-back:hover { background: var(--gray-100); color: var(--black); }
+    .btn-next {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 11px 24px; background: var(--blue); color: white;
+      border: none; border-radius: 10px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 4px 12px rgba(26,86,219,0.25);
+    }
+    .btn-next:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(26,86,219,0.35); }
+
+    /* ── SUCCESS PAGE ── */
+    #page-success { padding: 88px 16px 48px; max-width: 520px; margin: 0 auto; }
+    .success-card {
+      background: white; border-radius: 20px; padding: 48px 36px;
+      text-align: center; border: 1px solid var(--gray-200);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      animation: scaleIn 0.5s ease;
+    }
+    .success-icon {
+      width: 80px; height: 80px; background: #d1fae5; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-size: 32px; color: var(--green);
+    }
+    .success-card h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .success-card p { font-size: 14px; color: var(--gray-500); line-height: 1.6; margin-bottom: 28px; }
+    .sku-box {
+      background: var(--gray-50); border-radius: 12px; padding: 20px;
+      margin-bottom: 24px;
+    }
+    .sku-label { font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .sku-display { display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .sku-value { font-family: monospace; font-size: 26px; font-weight: 700; color: var(--blue); }
+    .copy-btn {
+      width: 36px; height: 36px; background: white; border: 1px solid var(--gray-200);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; font-size: 14px; color: var(--gray-500);
+    }
+    .copy-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .sku-product { font-size: 13px; color: var(--gray-500); margin-top: 8px; }
+    .success-actions { display: flex; flex-direction: column; gap: 10px; }
+    .success-note {
+      margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--gray-100);
+      display: flex; align-items: flex-start; gap: 8px; justify-content: center;
+    }
+    .success-note p { font-size: 11px; color: var(--gray-400); max-width: 320px; line-height: 1.6; text-align: left; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .field-row { grid-template-columns: 1fr; }
+      .images-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .form-card { padding: 24px 18px; }
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      #page-dashboard { padding: 80px 14px 32px; }
+      .dashboard-header { flex-direction: column; align-items: flex-start; }
+      table thead th:nth-child(3),
+      table td:nth-child(3),
+      table thead th:nth-child(5),
+      table td:nth-child(5) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav id="main-nav" style="display:none;">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="goTo('dashboard')">
+      <div class="logo-icon">M</div>
+      <span class="logo-text">Manny Designs</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" id="nav-dashboard" onclick="goTo('dashboard')">Dashboard</button>
+      <button class="nav-link" id="nav-submit" onclick="goTo('submit')">Submit Product</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── LANDING PAGE ── -->
+<div id="page-landing" class="page active">
+  <div class="landing-card">
+    <div class="landing-logo-big">M</div>
+    <h1 class="landing-title">Manny Designs</h1>
+    <p class="landing-sub">Vendor Product Submission Portal</p>
+    <p class="landing-desc">Submit your products professionally for Jumia and ecommerce optimization. Streamlined intake for boutique owners and fashion vendors.</p>
+    <button class="btn-primary" onclick="goTo('dashboard')">
+      <i class="fas fa-arrow-right"></i> Continue to Portal
+    </button>
+    <button class="btn-secondary" onclick="goTo('submit')">
+      <i class="fas fa-plus"></i> Submit a Product
+    </button>
+    <p class="landing-footer">Fashion-forward ecommerce management for boutique owners</p>
+  </div>
+</div>
+
+<!-- ── DASHBOARD PAGE ── -->
+<div id="page-dashboard" class="page">
+  <div class="dashboard-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p>Overview of your product submissions and inventory status</p>
+    </div>
+    <button class="btn-new" onclick="goTo('submit')">
+      <i class="fas fa-plus"></i> New Submission
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-top">
+        <div>
+          <div class="stat-label">Total Products</div>
+          <div class="stat-value" id="stat-total">0</div>
+        </div>
+        <div class="stat-icon blue"><i class="fas fa-box"></i></div>
+      </div>
+      <div class="stat-meta"><span class="up">↑ Growing</span> · All submitted items</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div>
+          <div class="stat-label">Pending Uploads</div>
+          <div class="stat-value" id="stat-pending">0</div>
+        </div>
+        <div class="stat-icon amber"><i class="fas fa-clock"></i></div>
+      </div>
+      <div class="stat-meta">Awaiting listing on Jumia</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div>
+          <div class="stat-label">Uploaded</div>
+          <div class="stat-value" id="stat-uploaded">0</div>
+        </div>
+        <div class="stat-icon green"><i class="fas fa-check-double"></i></div>
+      </div>
+      <div class="stat-meta">Live on Jumia store</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div>
+          <div class="stat-label">Out of Stock</div>
+          <div class="stat-value" id="stat-outofstock">0</div>
+        </div>
+        <div class="stat-icon red"><i class="fas fa-times-circle"></i></div>
+      </div>
+      <div class="stat-meta">Need restocking</div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <div class="table-header">
+      <h2>Recent Submissions</h2>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterTable('all', this)">All</button>
+        <button class="filter-tab" onclick="filterTable('ready', this)">Ready</button>
+        <button class="filter-tab" onclick="filterTable('pending', this)">Pending</button>
+        <button class="filter-tab" onclick="filterTable('uploaded', this)">Uploaded</button>
+        <button class="filter-tab" onclick="filterTable('outofstock', this)">Out of Stock</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>SKU</th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th style="text-align:right;">Price</th>
+          </tr>
+        </thead>
+        <tbody id="products-table">
+          <tr>
+            <td colspan="6" style="text-align:center; padding:40px; color:var(--gray-400); font-size:14px;">
+              No products submitted yet. <button onclick="goTo('submit')" style="color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;font-size:14px;">Submit your first product →</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ── SUBMIT PAGE ── -->
+<div id="page-submit" class="page">
+  <div class="form-title">
+    <h1>Product Submission</h1>
+    <p>Complete all sections to submit your product for ecommerce upload</p>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-meta">
+      <span class="step-label" id="step-label">Step 1 of 5</span>
+      <span class="pct" id="step-pct">20%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:20%;"></div>
+    </div>
+  </div>
+
+  <div class="form-card">
+
+    <!-- STEP 1: Basic Info -->
+    <div class="form-step active" id="step-1">
+      <h2>Basic Information</h2>
+      <p class="step-desc">Enter the core details about the product</p>
+      <div class="field-group">
+        <div class="field">
+          <label>Product Name <span class="req">*</span></label>
+          <input type="text" id="f-name" placeholder="e.g. Slim Fit Denim Jeans" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Category <span class="req">*</span></label>
+            <select id="f-category">
+              <option value="">Select category</option>
+              <option>Dresses</option>
+              <option>Tops</option>
+              <option>Trousers</option>
+              <option>Jeans</option>
+              <option>Skirts</option>
+              <option>Jackets &amp; Coats</option>
+              <option>Jumpsuits</option>
+              <option>T-Shirts</option>
+              <option>Shirts</option>
+              <option>Hoodies &amp; Sweatshirts</option>
+              <option>Polo</option>
+              <option>Shorts</option>
+              <option>Lingerie &amp; Sleepwear</option>
+              <option>Activewear</option>
+              <option>Accessories</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Gender Target <span class="req">*</span></label>
+            <select id="f-gender">
+              <option value="">Select</option>
+              <option>Women</option>
+              <option>Men</option>
+              <option>Unisex</option>
+              <option>Kids</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Selling Price (₦) <span class="req">*</span></label>
+            <input type="number" id="f-price" placeholder="e.g. 18500" min="0" />
+          </div>
+          <div class="field">
+            <label>Quantity in Stock <span class="req">*</span></label>
+            <input type="number" id="f-qty" placeholder="e.g. 10" min="1" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Material / Fabric</label>
+          <input type="text" id="f-material" placeholder="e.g. 100% Cotton, Polyester blend" />
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Sizes & Colors -->
+    <div class="form-step" id="step-2">
+      <h2>Sizes &amp; Colors</h2>
+      <p class="step-desc">Select available sizes and add color variants</p>
+      <div class="field-group">
+        <div class="field">
+          <label>Available Sizes <span class="req">*</span></label>
+          <div class="size-grid" id="size-grid">
+            <div class="size-chip" onclick="toggleSize(this)">XS</div>
+            <div class="size-chip" onclick="toggleSize(this)">S</div>
+            <div class="size-chip" onclick="toggleSize(this)">M</div>
+            <div class="size-chip" onclick="toggleSize(this)">L</div>
+            <div class="size-chip" onclick="toggleSize(this)">XL</div>
+            <div class="size-chip" onclick="toggleSize(this)">XXL</div>
+            <div class="size-chip" onclick="toggleSize(this)">28</div>
+            <div class="size-chip" onclick="toggleSize(this)">30</div>
+            <div class="size-chip" onclick="toggleSize(this)">32</div>
+            <div class="size-chip" onclick="toggleSize(this)">34</div>
+            <div class="size-chip" onclick="toggleSize(this)">36</div>
+            <div class="size-chip" onclick="toggleSize(this)">38</div>
+            <div class="size-chip" onclick="toggleSize(this)">Free Size</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Available Colors <span class="req">*</span></label>
+          <div class="color-list" id="color-list">
+            <div class="color-entry">
+              <input type="color" value="#000000" />
+              <input type="text" placeholder="Color name (e.g. Midnight Black)" />
+            </div>
+          </div>
+          <button class="btn-add-color" onclick="addColor()">
+            <i class="fas fa-plus"></i> Add Color
+          </button>
+        </div>
+        <div class="field">
+          <label>Brand / Label Name</label>
+          <input type="text" id="f-brand" placeholder="Leave blank if no brand label" />
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Images -->
+    <div class="form-step" id="step-3">
+      <h2>Product Images</h2>
+      <p class="step-desc">Upload clear images for each angle — front and back are required</p>
+      <div class="images-grid">
+        <div class="field">
+          <label>Front Image <span class="req">*</span></label>
+          <div class="upload-box" id="box-front">
+            <label class="upload-label">
+              <i class="fas fa-image"></i>
+              <span>Drag &amp; drop or click to upload</span>
+              <input type="file" accept="image/*" onchange="previewImage(this, 'box-front')" />
+            </label>
+            <div class="upload-preview" id="preview-front">
+              <img id="img-front" src="" alt="Front" />
+              <button class="remove-img" onclick="removeImage('box-front', 'img-front')">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Back Image <span class="req">*</span></label>
+          <div class="upload-box" id="box-back">
+            <label class="upload-label">
+              <i class="fas fa-image"></i>
+              <span>Drag &amp; drop or click to upload</span>
+              <input type="file" accept="image/*" onchange="previewImage(this, 'box-back')" />
+            </label>
+            <div class="upload-preview" id="preview-back">
+              <img id="img-back" src="" alt="Back" />
+              <button class="remove-img" onclick="removeImage('box-back', 'img-back')">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Fabric Close-Up <span class="req">*</span></label>
+          <div class="upload-box" id="box-fabric">
+            <label class="upload-label">
+              <i class="fas fa-image"></i>
+              <span>Drag &amp; drop or click to upload</span>
+              <input type="file" accept="image/*" onchange="previewImage(this, 'box-fabric')" />
+            </label>
+            <div class="upload-preview" id="preview-fabric">
+              <img id="img-fabric" src="" alt="Fabric" />
+              <button class="remove-img" onclick="removeImage('box-fabric', 'img-fabric')">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Label / Tag Close-Up <span class="req">*</span></label>
+          <div class="upload-box" id="box-label">
+            <label class="upload-label">
+              <i class="fas fa-image"></i>
+              <span>Drag &amp; drop or click to upload</span>
+              <input type="file" accept="image/*" onchange="previewImage(this, 'box-label')" />
+            </label>
+            <div class="upload-preview" id="preview-label">
+              <img id="img-label" src="" alt="Label" />
+              <button class="remove-img" onclick="removeImage('box-label', 'img-label')">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Flat Lay Image</label>
+          <div class="upload-box" id="box-flatlay">
+            <label class="upload-label">
+              <i class="fas fa-image"></i>
+              <span>Drag &amp; drop or click to upload</span>
+              <input type="file" accept="image/*" onchange="previewImage(this, 'box-flatlay')" />
+            </label>
+            <div class="upload-preview" id="preview-flatlay">
+              <img id="img-flatlay" src="" alt="Flat Lay" />
+              <button class="remove-img" onclick="removeImage('box-flatlay', 'img-flatlay')">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Model / Styled Image</label>
+          <div class="upload-box" id="box-model">
+            <label class="upload-label">
+              <i class="fas fa-image"></i>
+              <span>Drag &amp; drop or click to upload</span>
+              <input type="file" accept="image/*" onchange="previewImage(this, 'box-model')" />
+            </label>
+            <div class="upload-preview" id="preview-model">
+              <img id="img-model" src="" alt="Model" />
+              <button class="remove-img" onclick="removeImage('box-model', 'img-model')">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Description & Review -->
+    <div class="form-step" id="step-4">
+      <h2>Description &amp; Review</h2>
+      <p class="step-desc">Add product description then review before submitting</p>
+      <div class="field-group">
+        <div class="field">
+          <label>Product Description <span class="req">*</span></label>
+          <textarea id="f-desc" rows="5" placeholder="Describe the product features, material, and key selling points..."></textarea>
+        </div>
+        <div class="field">
+          <label>Styling Details</label>
+          <textarea id="f-styling" rows="3" placeholder="How should this be styled? What outfits does it pair with?"></textarea>
+        </div>
+        <div class="field">
+          <label>Additional Notes</label>
+          <textarea id="f-notes" rows="3" placeholder="Any special instructions or extra information..."></textarea>
+          <span class="hint">Maximum 500 characters</span>
+        </div>
+
+        <div class="preview-box" id="submission-preview">
+          <h3>Submission Summary</h3>
+          <div class="preview-grid" id="preview-grid"></div>
+        </div>
+
+        <div class="info-box">
+          <i class="fas fa-info-circle"></i>
+          <p>
+            <strong>Ready to Submit</strong>
+            Once submitted, your product details and images will be saved to Google Sheets automatically. You cannot edit after submission so review carefully.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: Review & Submit (now step 4 continuation) -->
+    <div class="form-step" id="step-5" style="display:none!important;"></div>
+
+    <!-- Navigation -->
+    <div class="form-nav">
+      <button class="btn-back" id="btn-back" onclick="prevStep()" style="visibility:hidden;">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <button class="btn-next" id="btn-next" onclick="nextStep()">
+        Next Step <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SUCCESS PAGE ── -->
+<div id="page-success" class="page">
+  <div class="success-card">
+    <div class="success-icon">
+      <i class="fas fa-check"></i>
+    </div>
+    <h1>Submission Successful!</h1>
+    <p>Your product has been submitted and will be processed for ecommerce upload.</p>
+
+    <div class="sku-box">
+      <div class="sku-label">Generated SKU</div>
+      <div class="sku-display">
+        <span class="sku-value" id="success-sku">—</span>
+        <button class="copy-btn" onclick="copySKU()" title="Copy SKU">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+      <div class="sku-product" id="success-product-name"></div>
+    </div>
+
+    <div class="success-actions">
+      <button class="btn-primary" onclick="submitAnother()">
+        <i class="fas fa-plus"></i> Submit Another Product
+      </button>
+      <button class="btn-secondary" onclick="goTo('dashboard')">
+        <i class="fas fa-th-large"></i> Go to Dashboard
+      </button>
+    </div>
+
+    <div class="success-note">
+      <i class="fas fa-info-circle" style="color:var(--gray-400);font-size:13px;margin-top:2px;"></i>
+      <p>Data has been queued for Google Sheets sync. All submission details including images and timestamps will appear in your connected spreadsheet.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ─────────────────────────────────────────
+     STATE
+  ───────────────────────────────────────── */
+  let currentStep = 1;
+  const totalSteps = 4;
+  let products = JSON.parse(localStorage.getItem('md_products') || '[]');
+
+  /* ─────────────────────────────────────────
+     NAVIGATION
+  ───────────────────────────────────────── */
+  function goTo(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+
+    const nav = document.getElementById('main-nav');
+    nav.style.display = page === 'landing' ? 'none' : 'block';
+
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + page);
+    if (navEl) navEl.classList.add('active');
+
+    window.scrollTo(0, 0);
+
+    if (page === 'dashboard') refreshDashboard();
+    if (page === 'submit') resetForm();
+  }
+
+  /* ─────────────────────────────────────────
+     FORM STEPS
+  ───────────────────────────────────────── */
+  function setStep(n) {
+    document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+
+    const pct = Math.round((n / totalSteps) * 100);
+    document.getElementById('step-label').textContent = `Step ${n} of ${totalSteps}`;
+    document.getElementById('step-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    document.getElementById('btn-back').style.visibility = n === 1 ? 'hidden' : 'visible';
+
+    const nextBtn = document.getElementById('btn-next');
+    if (n === totalSteps) {
+      nextBtn.innerHTML = '<i class="fas fa-check"></i> Submit Product';
+    } else {
+      nextBtn.innerHTML = 'Next Step <i class="fas fa-arrow-right"></i>';
+    }
+
+    if (n === totalSteps) buildPreview();
+    currentStep = n;
+  }
+
+  function nextStep() {
+    if (!validateStep(currentStep)) return;
+    if (currentStep === totalSteps) {
+      submitProduct();
+      return;
+    }
+    setStep(currentStep + 1);
+  }
+
+  function prevStep() {
+    if (currentStep > 1) setStep(currentStep - 1);
+  }
+
+  function resetForm() {
+    currentStep = 1;
+    setStep(1);
+    // Clear fields
+    ['f-name','f-category','f-gender','f-price','f-qty','f-material',
+     'f-brand','f-desc','f-styling','f-notes'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    // Reset sizes
+    document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('selected'));
+    // Reset colors
+    const cl = document.getElementById('color-list');
+    cl.innerHTML = `<div class="color-entry">
+      <input type="color" value="#000000" />
+      <input type="text" placeholder="Color name (e.g. Midnight Black)" />
+    </div>`;
+    // Reset images
+    ['front','back','fabric','label','flatlay','model'].forEach(k => {
+      const box = document.getElementById('box-' + k);
+      if (box) {
+        box.classList.remove('has-image');
+        const img = document.getElementById('img-' + k);
+        if (img) img.src = '';
+      }
+    });
+  }
+
+  /* ─────────────────────────────────────────
+     VALIDATION
+  ───────────────────────────────────────── */
+  function validateStep(n) {
+    if (n === 1) {
+      const name = document.getElementById('f-name').value.trim();
+      const cat = document.getElementById('f-category').value;
+      const gender = document.getElementById('f-gender').value;
+      const price = document.getElementById('f-price').value;
+      const qty = document.getElementById('f-qty').value;
+      if (!name || !cat || !gender || !price || !qty) {
+        alert('Please fill in all required fields before continuing.');
+        return false;
+      }
+    }
+    if (n === 2) {
+      const sizes = document.querySelectorAll('.size-chip.selected');
+      if (sizes.length === 0) {
+        alert('Please select at least one size.');
+        return false;
+      }
+      const colorInputs = document.querySelectorAll('#color-list input[type="text"]');
+      const hasColor = Array.from(colorInputs).some(i => i.value.trim());
+      if (!hasColor) {
+        alert('Please add at least one color.');
+        return false;
+      }
+    }
+    if (n === 3) {
+      const required = ['box-front', 'box-back', 'box-fabric', 'box-label'];
+      const missing = required.filter(id => !document.getElementById(id).classList.contains('has-image'));
+      if (missing.length > 0) {
+        alert('Please upload all required images (Front, Back, Fabric Close-Up, Label).');
+        return false;
+      }
+    }
+    if (n === 4) {
+      const desc = document.getElementById('f-desc').value.trim();
+      if (!desc) {
+        alert('Please add a product description.');
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /* ─────────────────────────────────────────
+     SIZES & COLORS
+  ───────────────────────────────────────── */
+  function toggleSize(el) {
+    el.classList.toggle('selected');
+  }
+
+  function addColor() {
+    const cl = document.getElementById('color-list');
+    const entry = document.createElement('div');
+    entry.className = 'color-entry';
+    entry.innerHTML = `<input type="color" value="#ffffff" /><input type="text" placeholder="Color name (e.g. Ivory White)" />`;
+    cl.appendChild(entry);
+  }
+
+  /* ─────────────────────────────────────────
+     IMAGE PREVIEW
+  ───────────────────────────────────────── */
+  function previewImage(input, boxId) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const box = document.getElementById(boxId);
+      const key = boxId.replace('box-', '');
+      const img = document.getElementById('img-' + key);
+      if (img) { img.src = e.target.result; }
+      box.classList.add('has-image');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removeImage(boxId, imgId) {
+    document.getElementById(boxId).classList.remove('has-image');
+    document.getElementById(imgId).src = '';
+  }
+
+  /* ─────────────────────────────────────────
+     SUBMISSION PREVIEW
+  ───────────────────────────────────────── */
+  function buildPreview() {
+    const name = document.getElementById('f-name').value;
+    const cat = document.getElementById('f-category').value;
+    const gender = document.getElementById('f-gender').value;
+    const sizes = Array.from(document.querySelectorAll('.size-chip.selected')).map(c => c.textContent).join(', ');
+    const price = document.getElementById('f-price').value;
+    const qty = document.getElementById('f-qty').value;
+    const colors = Array.from(document.querySelectorAll('#color-list input[type="text"]'))
+      .map(i => i.value.trim()).filter(Boolean).join(', ');
+    const imgCount = ['box-front','box-back','box-fabric','box-label','box-flatlay','box-model']
+      .filter(id => document.getElementById(id).classList.contains('has-image')).length;
+
+    const grid = document.getElementById('preview-grid');
+    grid.innerHTML = `
+      <span class="preview-key">Product:</span><span class="preview-val">${name || '—'}</span>
+      <span class="preview-key">Category:</span><span class="preview-val">${cat || '—'}</span>
+      <span class="preview-key">Gender:</span><span class="preview-val">${gender || '—'}</span>
+      <span class="preview-key">Price:</span><span class="preview-val">₦${Number(price||0).toLocaleString()}</span>
+      <span class="preview-key">Quantity:</span><span class="preview-val">${qty || '—'} units</span>
+      <span class="preview-key">Sizes:</span><span class="preview-val">${sizes || '—'}</span>
+      <span class="preview-key">Colors:</span><span class="preview-val">${colors || '—'}</span>
+      <span class="preview-key">Images:</span><span class="preview-val">${imgCount} uploaded</span>
+    `;
+  }
+
+  /* ─────────────────────────────────────────
+     SUBMIT PRODUCT
+  ───────────────────────────────────────── */
+  function generateSKU(category) {
+    const prefixes = {
+      'Dresses': 'DR', 'Tops': 'TP', 'Trousers': 'TR', 'Jeans': 'JN',
+      'Skirts': 'SK', 'Jackets & Coats': 'JK', 'Jumpsuits': 'JS',
+      'T-Shirts': 'TS', 'Shirts': 'SH', 'Hoodies & Sweatshirts': 'HD',
+      'Polo': 'PO', 'Shorts': 'ST', 'Lingerie & Sleepwear': 'LG',
+      'Activewear': 'AW', 'Accessories': 'AC', 'Other': 'OT'
+    };
+    const prefix = prefixes[category] || 'MD';
+    const num = String(products.length + 1).padStart(3, '0');
+    return prefix + num;
+  }
+
+  function submitProduct() {
+    const name = document.getElementById('f-name').value.trim();
+    const cat = document.getElementById('f-category').value;
+    const gender = document.getElementById('f-gender').value;
+    const price = parseFloat(document.getElementById('f-price').value);
+    const qty = parseInt(document.getElementById('f-qty').value);
+    const material = document.getElementById('f-material').value.trim();
+    const brand = document.getElementById('f-brand').value.trim();
+    const description = document.getElementById('f-desc').value.trim();
+    const styling = document.getElementById('f-styling').value.trim();
+    const notes = document.getElementById('f-notes').value.trim();
+    const sizes = Array.from(document.querySelectorAll('.size-chip.selected')).map(c => c.textContent).join(', ');
+    const colors = Array.from(document.querySelectorAll('#color-list input[type="text"]')).map(i => i.value.trim()).filter(Boolean).join(', ');
+    const sku = generateSKU(cat);
+    const date = new Date().toISOString().split('T')[0];
+
+    const product = { sku, name, category: cat, gender, price, qty, sizes, date, status: 'pending' };
+    products.push(product);
+    localStorage.setItem('md_products', JSON.stringify(products));
+
+    // Show success immediately — don't wait for sheets
+    document.getElementById('success-sku').textContent = sku;
+    document.getElementById('success-product-name').textContent = name;
+    goTo('success');
+
+    // Build full payload with images and send to Apps Script
+    const payload = {
+      sheetName: SHEET_NAME,
+      sku, date, name, category: cat, gender, price, qty,
+      sizes, colors, material, brand, description, styling, notes,
+      frontImage:   document.getElementById('img-front').src   || '',
+      backImage:    document.getElementById('img-back').src    || '',
+      fabricImage:  document.getElementById('img-fabric').src  || '',
+      labelImage:   document.getElementById('img-label').src   || '',
+      flatlayImage: document.getElementById('img-flatlay').src || '',
+      modelImage:   document.getElementById('img-model').src   || '',
+    };
+    sendToSheets(payload);
+  }
+
+  /* ─────────────────────────────────────────
+     GOOGLE SHEETS INTEGRATION
+  ───────────────────────────────────────── */
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbye9WlmK15OkZT2PfP-KDIQVmAmDwWqklnr00jJdJlf2wMgU67-U5Y_Eu1I2auY4V8K/exec';
+  const SHEET_NAME = 'Tipsy Boutique'; // ← Change this when onboarding a new client
+
+  async function sendToSheets(payload) {
+    if (!APPS_SCRIPT_URL) return;
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      console.log('Sheets sync failed:', e);
+    }
+  }
+
+  /* ─────────────────────────────────────────
+     DASHBOARD
+  ───────────────────────────────────────── */
+  function refreshDashboard() {
+    // Stats
+    const total = products.length;
+    const pending = products.filter(p => p.status === 'pending').length;
+    const uploaded = products.filter(p => p.status === 'uploaded').length;
+    const oos = products.filter(p => p.status === 'outofstock').length;
+
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-pending').textContent = pending;
+    document.getElementById('stat-uploaded').textContent = uploaded;
+    document.getElementById('stat-outofstock').textContent = oos;
+
+    renderTable('all');
+  }
+
+  let currentFilter = 'all';
+
+  function filterTable(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderTable(filter);
+  }
+
+  function renderTable(filter) {
+    const tbody = document.getElementById('products-table');
+    let filtered = filter === 'all' ? products : products.filter(p => p.status === filter);
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);font-size:14px;">
+        ${products.length === 0
+          ? `No products yet. <button onclick="goTo('submit')" style="color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;font-size:14px;">Submit your first →</button>`
+          : 'No products match this filter.'}
+      </td></tr>`;
+      return;
+    }
+
+    const badgeMap = {
+      ready: '<span class="badge ready">Ready To Upload</span>',
+      pending: '<span class="badge pending">Pending</span>',
+      uploaded: '<span class="badge uploaded">Uploaded</span>',
+      editing: '<span class="badge editing">Needs Editing</span>',
+      outofstock: '<span class="badge outofstock">Out Of Stock</span>',
+    };
+
+    tbody.innerHTML = filtered.slice().reverse().map(p => `
+      <tr>
+        <td><span class="sku">${p.sku}</span></td>
+        <td><span class="product-name">${p.name}</span></td>
+        <td><span class="category">${p.category}</span></td>
+        <td>${badgeMap[p.status] || p.status}</td>
+        <td><span class="date">${p.date}</span></td>
+        <td style="text-align:right;"><span class="price">₦${Number(p.price).toLocaleString()}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  /* ─────────────────────────────────────────
+     SUCCESS HELPERS
+  ───────────────────────────────────────── */
+  function copySKU() {
+    const sku = document.getElementById('success-sku').textContent;
+    navigator.clipboard.writeText(sku).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i>'; }, 1500);
+    });
+  }
+
+  function submitAnother() {
+    goTo('submit');
+  }
+
+  /* ─────────────────────────────────────────
+     INIT
+  ───────────────────────────────────────── */
+  goTo('landing');
+</script>
+</body>
+</html>
