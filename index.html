@@ -543,17 +543,16 @@
       <table>
         <thead>
           <tr>
-            <th>SKU</th>
             <th>Product</th>
             <th>Category</th>
-            <th>Status</th>
+            <th>Gender</th>
             <th>Date</th>
             <th style="text-align:right;">Price</th>
           </tr>
         </thead>
         <tbody id="products-table">
           <tr>
-            <td colspan="6" style="text-align:center; padding:40px; color:var(--gray-400); font-size:14px;">
+            <td colspan="5" style="text-align:center; padding:40px; color:var(--gray-400); font-size:14px;">
               No products submitted yet. <button onclick="goTo('submit')" style="color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;font-size:14px;">Submit your first product →</button>
             </td>
           </tr>
@@ -814,17 +813,12 @@
       <i class="fas fa-check"></i>
     </div>
     <h1>Submission Successful!</h1>
-    <p>Your product has been submitted and will be processed for ecommerce upload.</p>
+    <p>Your product has been submitted successfully and will be processed for listing shortly.</p>
 
     <div class="sku-box">
-      <div class="sku-label">Generated SKU</div>
-      <div class="sku-display">
-        <span class="sku-value" id="success-sku">—</span>
-        <button class="copy-btn" onclick="copySKU()" title="Copy SKU">
-          <i class="fas fa-copy"></i>
-        </button>
-      </div>
-      <div class="sku-product" id="success-product-name"></div>
+      <div class="sku-label">Product Submitted</div>
+      <div style="font-size:18px;font-weight:700;color:var(--black);margin:8px 0;" id="success-product-name"></div>
+      <div style="font-size:12px;color:var(--gray-400);">Submitted on <span id="success-date"></span></div>
     </div>
 
     <div class="success-actions">
@@ -838,7 +832,7 @@
 
     <div class="success-note">
       <i class="fas fa-info-circle" style="color:var(--gray-400);font-size:13px;margin-top:2px;"></i>
-      <p>Data has been queued for Google Sheets sync. All submission details including images and timestamps will appear in your connected spreadsheet.</p>
+      <p>All product details and images have been saved. You will be notified once your product is live.</p>
     </div>
   </div>
 </div>
@@ -1080,19 +1074,19 @@
     const sku = generateSKU(cat);
     const date = new Date().toISOString().split('T')[0];
 
-    const product = { sku, name, category: cat, gender, price, qty, sizes, date, status: 'uploaded' };
+    const product = { name, category: cat, gender, price, qty, sizes, date, status: 'uploaded' };
     products.push(product);
     localStorage.setItem('md_products', JSON.stringify(products));
 
     // Show success immediately — don't wait for sheets
-    document.getElementById('success-sku').textContent = sku;
     document.getElementById('success-product-name').textContent = name;
+    document.getElementById('success-date').textContent = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
     goTo('success');
 
     // Build full payload with images and send to Apps Script
     const payload = {
       sheetName: SHEET_NAME,
-      sku, date, name, category: cat, gender, price, qty,
+      date, name, category: cat, gender, price, qty,
       sizes, colors, material, brand, description, styling, notes,
       frontImage:   document.getElementById('img-front').src   || '',
       backImage:    document.getElementById('img-back').src    || '',
@@ -1107,7 +1101,7 @@
   /* ─────────────────────────────────────────
      GOOGLE SHEETS INTEGRATION
   ───────────────────────────────────────── */
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbye9WlmK15OkZT2PfP-KDIQVmAmDwWqklnr00jJdJlf2wMgU67-U5Y_Eu1I2auY4V8K/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbt5S2WB6Hu5ihag6D_hTWUChsS12xss5Gbs3DctvJQM4UVuNGjYdHE8B1-rA8JeZ8/exec';
   const SHEET_NAME = 'Tipsy Boutique'; // ← Change this when onboarding a new client
 
   async function sendToSheets(payload) {
@@ -1162,7 +1156,7 @@
     else filtered = products.filter(p => p.status === filter);
 
     if (filtered.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);font-size:14px;">
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--gray-400);font-size:14px;">
         ${products.length === 0
           ? `No products yet. <button onclick="goTo('submit')" style="color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;font-size:14px;">Submit your first →</button>`
           : 'No products match this filter.'}
@@ -1170,20 +1164,11 @@
       return;
     }
 
-    const badgeMap = {
-      ready: '<span class="badge ready">Ready To Upload</span>',
-      pending: '<span class="badge pending">Pending</span>',
-      uploaded: '<span class="badge uploaded">Uploaded</span>',
-      editing: '<span class="badge editing">Needs Editing</span>',
-      outofstock: '<span class="badge outofstock">Out Of Stock</span>',
-    };
-
     tbody.innerHTML = filtered.slice().reverse().map(p => `
       <tr>
-        <td><span class="sku">${p.sku}</span></td>
         <td><span class="product-name">${p.name}</span></td>
         <td><span class="category">${p.category}</span></td>
-        <td>${badgeMap[p.status] || p.status}</td>
+        <td><span class="category">${p.gender}</span></td>
         <td><span class="date">${p.date}</span></td>
         <td style="text-align:right;"><span class="price">₦${Number(p.price).toLocaleString()}</span></td>
       </tr>
