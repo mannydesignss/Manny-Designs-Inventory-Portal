@@ -722,7 +722,7 @@
           </div>
         </div>
         <div class="field">
-          <label>Label / Tag Close-Up <span style="color:var(--gray-400);font-size:11px;">recommended</span></label>
+          <label>Label / Tag Close-Up <span class="req">*</span></label>
           <div class="upload-box" id="box-label">
             <label class="upload-label">
               <i class="fas fa-image"></i>
@@ -960,7 +960,7 @@
       }
     }
     if (n === 3) {
-      const required = ['box-front', 'box-back', 'box-fabric'];
+      const required = ['box-front', 'box-back', 'box-fabric', 'box-label'];
       const missing = required.filter(id => !document.getElementById(id).classList.contains('has-image'));
       if (missing.length > 0) {
         alert('Please upload all required images (Front, Back, Fabric Close-Up, Label).');
@@ -1010,8 +1010,11 @@
   }
 
   function removeImage(boxId, imgId) {
-    document.getElementById(boxId).classList.remove('has-image');
+    const box = document.getElementById(boxId);
+    box.classList.remove('has-image');
     document.getElementById(imgId).src = '';
+    // Reset all file inputs inside this box so they trigger again
+    box.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
   }
 
   /* ─────────────────────────────────────────
@@ -1101,7 +1104,7 @@
   /* ─────────────────────────────────────────
      GOOGLE SHEETS INTEGRATION
   ───────────────────────────────────────── */
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbt5S2WB6Hu5ihag6D_hTWUChsS12xss5Gbs3DctvJQM4UVuNGjYdHE8B1-rA8JeZ8/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbye9WlmK15OkZT2PfP-KDIQVmAmDwWqklnr00jJdJlf2wMgU67-U5Y_Eu1I2auY4V8K/exec';
   const SHEET_NAME = 'Tipsy Boutique'; // ← Change this when onboarding a new client
 
   async function sendToSheets(payload) {
